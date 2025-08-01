@@ -1,4 +1,4 @@
-firewall:
+firewall_rules:
   enabled: True
   rules:
     ssh:

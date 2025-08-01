@@ -1,8 +1,8 @@
 base:
-  'ubuntu0':
+  ubuntu0:
     - network_cfg
     - firewall_rules
 
-  'ubuntu1':
+  ubuntu1:
     - network_cfg
     - firewall_rules

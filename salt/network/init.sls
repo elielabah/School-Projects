@@ -1,15 +1,17 @@
 {% set cfg = salt['pillar.get']('network:' + grains['id'], {}) %}
-{% if not cfg %}
-{# Si aucune config du Pillar n’est trouvée, on log une alerte #}
-{%   do salt.log.warn('Aucune configuration réseau pour ' + grains['id']) %}
-{% endif %}
 
+{% if cfg %}
 {{ cfg.interface }}:
   network.managed:
-    - enabled: True        # On veut que Salt gère cette interface
-    - type: eth            # Type Ethernet (interface:ens33)
-    - proto: static        # IP statique
+    - enabled: True
+    - type: eth
+    - proto: static
     - ipaddr: {{ cfg.ipaddr }}
     - netmask: {{ cfg.netmask }}
     - gateway: {{ cfg.gateway }}
     - dns: {{ cfg.dns }}
+{% else %}
+log_no_cfg:
+  test.show_notification:
+    - text: " Aucune configuration réseau trouvée pour {{ grains['id'] }} dans le pillar"
+{% endif %}
