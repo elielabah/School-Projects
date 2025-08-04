@@ -10,6 +10,7 @@ base:
     - services.network_services_status
     - services.network_services_fix
     - network.dhcp_server.sls
+    - services.dhcp_server
   ubuntu1:
     - webserver
     - network
@@ -21,3 +22,4 @@ base:
     - services.network_services_status
     - services.network_services_fix
     - network.dhcp_server.sls
+    - services.dhcp_server
