@@ -1,0 +1,9 @@
+# Basic NTP config
+
+server time.google.com iburst
+server time.windows.com iburst
+
+driftfile /var/lib/chrony/chrony.drift
+makestep 1.0 3
+
+logdir /var/log/chrony
