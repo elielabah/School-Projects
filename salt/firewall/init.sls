@@ -1,12 +1,17 @@
-# Essai de récupération du pillar avec plusieurs possibilités
-{% set fw = salt['pillar.get']('firewall_rules', salt['pillar.get']('firewall', {})) %}
+# firewall/init.sls
 
-{% if fw and fw.get('rules') %}
-# Installation et activation de UFW
+{% set fw_all = salt['pillar.get']('firewall_rules', {}) %}
+{% set allow = fw_all.get('allow', []) %}
+{% set deny = fw_all.get('deny', []) %}
+{% set enabled = fw_all.get('enabled', False) %}
+
+{% if enabled %}
+# Installation de UFW
 ufw_pkg:
   pkg.installed:
     - name: ufw
 
+# Activation de UFW si non actif
 ufw_enable:
   cmd.run:
     - name: ufw --force enable
@@ -14,20 +19,28 @@ ufw_enable:
     - require:
       - pkg: ufw_pkg
 
-# Boucle sur chaque règle du pillar
-{% for name, rule in fw.get('rules', {}).items() %}
-ufw_rule_{{ name }}:
+# Ajout des règles autorisées
+{% for item in allow %}
+ufw_allow_{{ loop.index }}:
   cmd.run:
-    - name: ufw allow proto {{ rule.proto }} from any to any port {{ rule.port }}
-    - unless: 'ufw status | grep -q "{{ rule.port }}"'
+    - name: ufw allow {{ item }}
+    - unless: 'ufw status | grep -q "{{ item }}"'
+    - require:
+      - cmd: ufw_enable
+{% endfor %}
+
+# Ajout des règles à interdire
+{% for item in deny %}
+ufw_deny_{{ loop.index }}:
+  cmd.run:
+    - name: ufw deny {{ item }}
+    - unless: 'ufw status | grep -q "{{ item }}"'
     - require:
       - cmd: ufw_enable
 {% endfor %}
 
 {% else %}
-# Aucune configuration firewall trouvée
-firewall_no_config:
+firewall_disabled:
   test.succeed_without_changes:
-    - name: "Aucune configuration firewall trouvée dans les pillars"
-
+    - name: "Firewall non activé (clé 'enabled' absente ou à False dans le pillar)"
 {% endif %}

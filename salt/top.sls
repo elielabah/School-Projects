@@ -1,9 +1,8 @@
 #########################ubuntu0#######################################
 base:
   ubuntu0:
-    - webserver
     - network
-    - firewall
+    - firewall.main
     - diagnostic.connectivity_test
     - diagnostic.network_diagnostic
     - diagnostic.arp_neigh_diag
@@ -14,12 +13,12 @@ base:
     - services.dhcp_server
     - services.ntp_client
     - prereqs.network_tools
+    - annihilatio
 
 ######################ubuntu1####################################
   ubuntu1:
-    - webserver
     - network
-    - firewall
+    - firewall.main
     - diagnostic.connectivity_test
     - diagnostic.network_diagnostic
     - diagnostic.arp_neigh_diag
@@ -30,12 +29,12 @@ base:
     - services.dhcp_server
     - services.ntp_client
     - prereqs.network_tools
+    - annihilatio
 
 ######################ubuntu2####################################
-  ubuntu1:
-    - webserver
+  ubuntu2:
     - network
-    - firewall
+    - firewall.main
     - diagnostic.connectivity_test
     - diagnostic.network_diagnostic
     - diagnostic.arp_neigh_diag
@@ -46,3 +45,4 @@ base:
     - services.dhcp_server
     - services.ntp_client
     - prereqs.network_tools
+    - annihilatio

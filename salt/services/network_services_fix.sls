@@ -15,5 +15,5 @@ ensure_networkd_running:
 
 ensure_ufw_enabled:
   cmd.run:
-    - name: ufw --force enable
-    - unless: ufw status | grep -q 'Status: active'
+    - name: "ufw --force enable"
+    - unless: "ufw status | grep -q 'Status: active'"
