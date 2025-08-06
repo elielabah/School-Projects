@@ -18,6 +18,7 @@ network:
       - 192.168.245.2
       - 8.8.8.8
       - 8.8.4.4
+
   ubuntu2:
     interface: ens33
     ipaddr: 192.168.245.150
