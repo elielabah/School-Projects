@@ -14,6 +14,7 @@ base:
     - prereqs.network_tools
     - network.ip_static_netplan0
     - diagnostic.ip_report.sls
+    - services.datetime_report
     - annihilatio
 
 ######################ubuntu1####################################
@@ -31,6 +32,7 @@ base:
     - prereqs.network_tools
     - network.ip_static_netplan1
     - diagnostic.ip_report.sls
+    - services.datetime_report
     - annihilatio
 
 ######################ubuntu2####################################
@@ -48,4 +50,5 @@ base:
     - prereqs.network_tools
     - network.ip_static_netplan2
     - diagnostic.ip_report.sls
+    - services.datetime_report
     - annihilatio
