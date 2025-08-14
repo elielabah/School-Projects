@@ -1,15 +1,11 @@
-update-vyos:
-  cmd.run:
-    - name: |
-        add system image http://mon-serveur/vyos-1.4.iso
-
 restore-config:
   cmd.run:
     - name: |
+        /bin/vbash -c '
+        source /opt/vyatta/etc/functions/script-template
         configure
-        load /config/backup/config-YYYY-MM-DD.conf
+        load $(ls -t /config/backup/config-*.conf | head -n 1)
         commit
         save
         exit
-    - require:
-      - cmd: update-vyos
+        '
