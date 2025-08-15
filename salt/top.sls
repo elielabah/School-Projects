@@ -52,3 +52,18 @@ base:
     - diagnostic.ip_report.sls
     - services.datetime_report
     - annihilatio
+#######################router_.20####################################
+  router_.20:
+    - router.router_.20_config
+    - router.secure_filter
+    - router.backup
+    - router.restore
+    - router.monitoring
+	
+#######################router_.30###############################
+  router_.30:
+    - router.router_.30_config
+    - router.secure_filter
+    - router.backup
+    - router.restore
+    - router.monitoring
