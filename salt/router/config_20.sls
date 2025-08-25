@@ -4,7 +4,7 @@ basic-network-config:
         /bin/vbash -c '
         source /opt/vyatta/etc/functions/script-template
         configure
-        set interfaces ethernet eth0 address 192.168.245.20/24
+        set interfaces ethernet eth0 address 192.168.245.10/24
         set interfaces ethernet eth0 description "WAN Interface"
         set interfaces ethernet eth1 address 10.0.0.1/24
         set interfaces ethernet eth1 description "LAN Interface"
