@@ -9,7 +9,7 @@ set_static_ip_netplan1:
             ens33:
               dhcp4: no
               addresses:
-                - 192.168.245.169/24
+                - 192.168.245.191/24
               gateway4: 192.168.245.2
               nameservers:
                 addresses:
